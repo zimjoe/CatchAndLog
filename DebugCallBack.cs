@@ -14,7 +14,7 @@ namespace CatchAndLog
             _logger = logger;
         }
 
-        [Function("Function1")]
+        [Function("DebugCallBack")]
         public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
