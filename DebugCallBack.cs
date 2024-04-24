@@ -15,10 +15,12 @@ namespace CatchAndLog
         }
 
         [Function("DebugCallBack")]
-        public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
-            return new OkObjectResult("Welcome to Azure Functions!");
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            _logger.LogInformation(requestBody);
+
+            return new OkObjectResult(requestBody);
         }
     }
 }
